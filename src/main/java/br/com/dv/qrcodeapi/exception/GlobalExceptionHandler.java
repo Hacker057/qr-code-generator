@@ -10,8 +10,17 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ImageProcessingException.class)
     public ResponseEntity<ApiError> handleImageProcessingException(ImageProcessingException e) {
+        return getResponseEntity(e, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(InvalidImageSizeException.class)
+    public ResponseEntity<ApiError> handleInvalidImageSizeException(Exception e) {
+        return getResponseEntity(e, HttpStatus.BAD_REQUEST);
+    }
+
+    private ResponseEntity<ApiError> getResponseEntity(Exception e, HttpStatus status) {
         ApiError error = new ApiError(e.getMessage());
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+        return ResponseEntity.status(status).body(error);
     }
 
     public record ApiError(String error) {

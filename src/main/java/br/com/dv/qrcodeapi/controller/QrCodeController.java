@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("/api/qrcode")
@@ -19,8 +20,8 @@ public class QrCodeController {
     }
 
     @GetMapping
-    public ResponseEntity<byte[]> generateQrCode() {
-        byte[] image = imageService.generateImage();
+    public ResponseEntity<byte[]> generateQrCode(@RequestParam int size) {
+        byte[] image = imageService.generateImage(size);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
