@@ -10,11 +10,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 @Service
-public class ImageServiceImpl implements ImageService {
+public class QrCodeServiceImpl implements QrCodeService {
 
     private final ParameterValidator parameterValidator;
 
-    public ImageServiceImpl(ParameterValidator parameterValidator) {
+    public QrCodeServiceImpl(ParameterValidator parameterValidator) {
         this.parameterValidator = parameterValidator;
     }
 

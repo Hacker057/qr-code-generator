@@ -1,7 +1,7 @@
 package br.com.dv.qrcodeapi.controller;
 
 import br.com.dv.qrcodeapi.dto.ImageResponse;
-import br.com.dv.qrcodeapi.service.ImageService;
+import br.com.dv.qrcodeapi.service.QrCodeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class QrCodeController {
 
-    private final ImageService imageService;
+    private final QrCodeService qrCodeService;
 
-    public QrCodeController(ImageService imageService) {
-        this.imageService = imageService;
+    public QrCodeController(QrCodeService qrCodeService) {
+        this.qrCodeService = qrCodeService;
     }
 
     @GetMapping
     public ResponseEntity<byte[]> generateQrCode(@RequestParam int size, @RequestParam(name = "type") String format) {
-        ImageResponse response = imageService.generateImage(size, format);
+        ImageResponse response = qrCodeService.generateImage(size, format);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
