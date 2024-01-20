@@ -1,8 +1,8 @@
 package br.com.dv.qrcodeapi.controller;
 
+import br.com.dv.qrcodeapi.dto.ImageResponse;
 import br.com.dv.qrcodeapi.service.ImageService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,13 +20,13 @@ public class QrCodeController {
     }
 
     @GetMapping
-    public ResponseEntity<byte[]> generateQrCode(@RequestParam int size) {
-        byte[] image = imageService.generateImage(size);
+    public ResponseEntity<byte[]> generateQrCode(@RequestParam int size, @RequestParam(name = "type") String format) {
+        ImageResponse response = imageService.generateImage(size, format);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .contentType(MediaType.IMAGE_PNG)
-                .body(image);
+                .contentType(response.mediaType())
+                .body(response.imageData());
     }
 
 }
