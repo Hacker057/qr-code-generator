@@ -28,6 +28,11 @@ public class GlobalExceptionHandler {
         return getResponseEntity(e, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(InvalidCorrectionLevelException.class)
+    public ResponseEntity<ApiError> handleInvalidCorrectionLevelException(Exception e) {
+        return getResponseEntity(e, HttpStatus.BAD_REQUEST);
+    }
+
     private ResponseEntity<ApiError> getResponseEntity(Exception e, HttpStatus status) {
         ApiError error = new ApiError(e.getMessage());
         return ResponseEntity.status(status).body(error);
