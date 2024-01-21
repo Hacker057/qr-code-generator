@@ -59,12 +59,11 @@ public class ParameterValidator {
     }
 
     private boolean isCorrectionLevelInvalid(String correction) {
-        return correction == null ||
-                VALID_CORRECTION_LEVELS.stream().noneMatch(c -> c.name().equalsIgnoreCase(correction));
+        return VALID_CORRECTION_LEVELS.stream().noneMatch(c -> c.name().equalsIgnoreCase(correction));
     }
 
     private boolean isFormatInvalid(String format) {
-        return format == null || SUPPORTED_IMAGE_FORMATS.stream().noneMatch(f -> f.name().equalsIgnoreCase(format));
+        return SUPPORTED_IMAGE_FORMATS.stream().noneMatch(f -> f.name().equalsIgnoreCase(format));
     }
 
 }
