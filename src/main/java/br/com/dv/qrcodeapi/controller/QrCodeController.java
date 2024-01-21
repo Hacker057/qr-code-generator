@@ -20,10 +20,12 @@ public class QrCodeController {
     }
 
     @GetMapping
-    public ResponseEntity<byte[]> generateQrCode(@RequestParam(name = "contents") String content,
-                                                 @RequestParam int size,
-                                                 @RequestParam String correction,
-                                                 @RequestParam(name = "type") String format) {
+    public ResponseEntity<byte[]> generateQrCode(
+            @RequestParam(name = "contents") String content,
+            @RequestParam(required = false, defaultValue = "250") int size,
+            @RequestParam(required = false, defaultValue = "L") String correction,
+            @RequestParam(name = "type", required = false, defaultValue = "png") String format
+    ) {
         ImageResponse response = qrCodeService.generateQrCode(content, size, correction, format);
 
         return ResponseEntity
